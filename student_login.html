@@ -1,48 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-<style type="text/css">
-    body {
-        margin-left: 0px;
-        margin-top: 0px;
-        margin-right: 0px;
-        margin-bottom: 0px;
-    }
-
-
-    #center {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 300px;
-        height: 200px;
-        overflow: hidden;
-        background-color: white;
-        margin-top: -150px;
-        margin-left: -100px;
-    }
-</style>
+<html>
 
 <head>
+    <style type="text/css">
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+
+
+        #center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            background-color: white;
+            margin-top: -150px;
+            margin-left: -100px;
+        }
+    </style>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>사용자 분류</title>
+    <title>Insert title here</title>
 </head>
 
 <body>
     <div id="center">
-            
-        <input type="text">
-
+        <form action="student_main.jsp" method="post">
+            <input type="text" name="stu_number"><br>
+            <input type="text" name="pw">
+            <input type="submit" value="로그인">
+        </form>
     </div>
-
 </body>
-<script>
-tutor_login =()=>{
-    location.href="./tutor_login.html"    
-}
-student_login =()=>{
-    location.href="./student_login.html"    
-}
-</script>
+
 </html>
