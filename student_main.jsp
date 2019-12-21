@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 처리</title>
+<title>학생 메인페이지</title>
     <style type="text/css">
         body {
             margin-left: 0px;

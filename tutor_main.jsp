@@ -8,16 +8,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 처리</title>
-
+<title>Tutor 메인화면</title>
 </head>
 <body>
-        <%-- -------------
-        보강시간표 내용
-        ------------- --%>
-                          
-</body>
-<script>
+    <%
+    String lectureName=request.getAttribute("lectureName");
+    System.out.println("lectureName");
+    %>
+  
 
-</script>
+</body>
+
 </html>
+
+    Connection conn=ConnectionContext.getConnection();
+    Statement stmt=conn.createStatement();
+    ResultSet rs=stmt.executeQuery("SELECT * FROM lecture_info WHERE Lecture=''");
