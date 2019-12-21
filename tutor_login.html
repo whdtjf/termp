@@ -1,12 +1,41 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
+    <style type="text/css">
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+
+
+        #center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            background-color: white;
+            margin-top: -150px;
+            margin-left: -100px;
+        }
+    </style>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Insert title here</title>
 </head>
+
 <body>
-    hi!
+    <div id="center">
+        <form action="TutorloginProcess.jsp" method="post">
+             교수 아이디를 입력하세요 : <input type="text" name="tutor_num"></br>
+            PW를 입력하세요 : <input type="text" name="pw"></br>
+            <input type="submit" value="로그인">
+        </form>
+    </div>
 </body>
+
 </html>
