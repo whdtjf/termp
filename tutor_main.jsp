@@ -22,7 +22,7 @@
 
       while(rs.next()){
          int recordCount = rs.getInt("recordCount");
-         if (recordCount != 1) {  //login User with ID
+         if (recordCount < 1) {  //login User with ID
     %>
 
          <script>
