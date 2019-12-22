@@ -17,7 +17,7 @@
     Connection conn = ConnectionContext.getConnection();
     Statement stmt = conn.createStatement();
     Statement stmt1 = conn.createStatement();
-    ResultSet rs = stmt.executeQuery("SELECT count(*) AS recordCount FROM lecture_info WHERE Lecture='"+lecture+"'");
+    ResultSet rs = stmt.executeQuery("SELECT count(*) AS recordCount FROM lecture_info WHERE Lecture='"+lecture+"' AND ID='"+id+"'");
     ResultSet rs2;
 
       while(rs.next()){
@@ -45,7 +45,7 @@
         </tr>
     
     <%
-    rs2=stmt1.executeQuery("SELECT * FROM lecture_info WHERE Lecture='"+lecture+"'");
+    rs2=stmt1.executeQuery("SELECT * FROM lecture_info WHERE Lecture='"+lecture+"' AND ID='"+id+"'");
     while(rs2.next()){
         String Nickname=rs2.getString("Nickname");
         String TutorName=rs2.getString("TutorName");
