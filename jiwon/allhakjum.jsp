@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="calculator.ConnectionContext"%>
+<%@ page import="lab.ConnectionContext"%>
 <%@ page import="java.sql.*"%>
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
 <body>
 <SCRIPT LANGUAGE="JavaScript">
 	function chkjolup() {
-		window.open("localhost:8080/ITSW/termproject/jolup.jsp");
+		window.open("localhost:8080/lab/termp/jolup.jsp");
 	}
 </SCRIPT> 
 	<P>누적학기 성적입니다.
