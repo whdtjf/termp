@@ -29,6 +29,7 @@
 			double total_grade = 0;
 			String grade;
 			int credits = 0;
+			int major_credits = 0;
 			Connection conn = ConnectionContext.getConnection();
 			String year = "Sugang";
 
@@ -65,7 +66,17 @@
 					} else if (grade.equals("D0")) {
 						year_total_grade = year_total_grade + 1.0;
 					}
-
+					pstmt = conn.prepareStatement("SELECT Major FROM Subinf WHERE subject=?");
+					pstmt.setString(1, subject);
+					rs2 = pstmt.executeQuery();
+					rs2.next();
+					String major = rs2.getString("Major");
+					String major_type = "?";
+					if(major.equals("major_required")) {
+						major_credits++;
+					} else if(major.equals("major_elective")) {
+						major_credits++;
+					}
 					rs2.close();
 				}
 
@@ -83,6 +94,9 @@
 			}
 				rs.close();
 				pstmt.close();
+				session.setAttribute("credits", credits);
+				session.setAttribute("total_grade", total_grade);
+				session.setAttribute("major_credits",major_credits);
 			}
 		%>
 	</table>
