@@ -10,7 +10,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table border=1 align='center'>
+
+	<table border=1>
 		<tr>
 			<TD WIDTH=100 HEIGHT=30 VALIGN=MIDDLE align='center' bgcolor='yellow'>\</TD>
 			<TD WIDTH=100 HEIGHT=30 VALIGN=MIDDLE align='center' bgcolor='yellow'>일</TD>
@@ -91,11 +92,6 @@
 					<%
 					}
 				}
-			%>
-
-
-
-			<%
 				}
 			%>
 		</tr>
@@ -103,7 +99,48 @@
 			}
 		%>
 	</table>
-
+	<SCRIPT LANGUAGE="JavaScript">
+	function confirm() {
+		for(k = 0; k < 7; k++) {
+			if(form.dow.options[k].selected){
+				
+			}	
+		}
+		for(k = 0; k < 12; k++) {
+			if(form.time.options[k].selected){
+			}	
+		}
+	}
+	</SCRIPT> 
+총 수강생 : <%= sugangsaeng %>명<br>
+<form action="confirm.jsp" method="get" name="form">
+요일 : 
+<select name="dow" size="1">
+	<option value="MON">MON
+	<option value="TUE">TUE
+	<option value="WED">WED
+	<option value="THU">THU
+	<option value="FRI">FRI
+	<option value="SAT">SAT
+	<option value="SUN">SUN
+</select>
+시간 : 
+<select name="time" size="1">
+	<option value="9">9
+	<option value="10">10
+	<option value="11">11
+	<option value="12">12
+	<option value="13">13
+	<option value="14">14
+	<option value="15">15
+	<option value="16">16
+	<option value="17">17
+	<option value="18">18
+	<option value="19">19
+	<option value="20">20
+</select>
+<input type="submit" name="subbtn" value="확정">
+</form>
 
 </body>
 </html>
