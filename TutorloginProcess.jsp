@@ -5,9 +5,9 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.io.*" %>
 
-<jsp:forward page="./tutor_main.jsp">
-<jsp:param name="lectureName" value="" />
-</jsp:forward>
+
+
+
 
 <%
   if(session.isNew()) {    //session이 처음으로 생성된 것인지 확인
@@ -18,18 +18,20 @@
         String pw=request.getParameter("pw");
         String lecture=request.getParameter("lecture");
 
-        request.setParameter(lectureName,lecture); //다시!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
         Connection conn = ConnectionContext.getConnection();
         Statement stmt = conn.createStatement();
       Statement stmt1 = conn.createStatement();
       ResultSet rs = stmt.executeQuery("SELECT count(*) AS recordCount FROM login WHERE Stu_num='"+id+"'");
       ResultSet rs2;
+%>
 
+<% 
       while(rs.next()){
          int recordCount = rs.getInt("recordCount");
          if (recordCount != 1) {  //login User with ID
     %>
+
          <script>
            alert("교수 ID가 존재하지 않습니다!");
           </script>
@@ -47,10 +49,9 @@
                    session.setAttribute("TutorID", id);  // 로그인 성공을 나타내는 특정속성 설정
                    
                    %>
-                   <script>
-                   
-                   location.href="./tutor_main.jsp";
-                   </script>
+            <jsp:forward page="./tutor_main.jsp">
+            <jsp:param name="lecture_info" value="<%= lecture %>"/>
+            </jsp:forward>
          <%
              }  
              else{

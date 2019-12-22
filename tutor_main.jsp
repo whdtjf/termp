@@ -12,8 +12,8 @@
 </head>
 <body>
     <%
-    String lectureName=request.getAttribute("lectureName");
-    System.out.println("lectureName");
+    String lectureName=request.getParameter("lecture_info");
+    System.out.println(lectureName);
     %>
   
 
