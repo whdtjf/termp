@@ -15,7 +15,7 @@
       Statement stmt1 = conn.createStatement();
       ResultSet rs = stmt.executeQuery("SELECT count(*) AS recordCount FROM login WHERE Stu_num='"+id+"'");
       ResultSet rs2;
-
+      
       while(rs.next()){
          int recordCount = rs.getInt("recordCount");
          if (recordCount != 1) {  //login User with ID
