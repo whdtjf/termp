@@ -42,7 +42,7 @@
 </body>
 <script>
 function checkGrade(){
-    location.href="./checkGrade.jsp"  
+    location.href="./checkGrade.html"  
 }
 function mySchedule(){
     location.href="./mySchedule.jsp"    
