@@ -12,8 +12,12 @@
 </head>
 <body>
     <%
-    String lectureName=request.getParameter("lecture_info");
-    System.out.println(lectureName);
+    String id=(String)pageContext.getSession().getAttribute("TutorID");
+    System.out.println(id);
+    String lecture=(String)pageContext.getSession().getAttribute("lecture_info");
+    System.out.println(lecture);
+
+
     %>
   
 
@@ -21,6 +25,3 @@
 
 </html>
 
-    Connection conn=ConnectionContext.getConnection();
-    Statement stmt=conn.createStatement();
-    ResultSet rs=stmt.executeQuery("SELECT * FROM lecture_info WHERE Lecture=''");

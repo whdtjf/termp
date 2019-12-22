@@ -6,10 +6,6 @@
 <%@ page import="java.io.*" %>
 
 <%
-  if(session.isNew()) {    //session이 처음으로 생성된 것인지 확인
-	out.println("<a href=student_login.html>처음부터</a>");
-  	
-  } else { //한번 더 접속하면 session.isNew()는 false를 반환하고 else문이 돌아간다
 
         String id=request.getParameter("stu_num");
   		System.out.println(id);
@@ -53,5 +49,5 @@
     <%           
              }
         }
-  }
+  
 %>
