@@ -46,7 +46,7 @@
         <option value="19970101">안준선 교수</option>
     </select>
     </br>
-    <input type="text" name="Nickname">
+    닉네임을 입력하세요(익명) : <input type="text" name="Nickname">
     </br>
         <select name="recommend">
         <option value=""> 추천점수</option>
@@ -57,7 +57,7 @@
         <option value="5">5</option>
     </select>
     </br>
-    <input type="text" name="lecture_eval_text">
+    강의평가를 해주세요 : <input type="text" name="lecture_eval_text">
     <input type="submit" value="강의평가제출">
  </form>
  <%
