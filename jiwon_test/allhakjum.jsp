@@ -25,10 +25,12 @@
 			<td>평점 평균</td>
 		</tr>
 		<%
-			int hakbun = 2013122148;
+			String id=(String)pageContext.getSession().getAttribute("StudentID");
+			int hakbun=Integer.parseInt(id);
 			double total_grade = 0;
 			String grade;
 			int credits = 0;
+			int major_credits = 0;
 			Connection conn = ConnectionContext.getConnection();
 			String year = "Sugang";
 
@@ -36,16 +38,12 @@
 				double year_total_grade = 0;
 				int year_credits = 0;
 				year = "Sugang" + Integer.toString(i);
-				PreparedStatement pstmt = conn.prepareStatement("SELECT Sub_name FROM " + year + " WHERE Hakbun=?");
-				pstmt.setInt(1, 2013122148);
-				ResultSet rs = pstmt.executeQuery();
-
+				Statement stmt = conn.createStatement();
+				ResultSet rs=stmt.executeQuery("SELECT Sub_name FROM " + year + " WHERE Hakbun='"+id+"'");
 				while (rs.next()) {
 					year_credits++;
 					String subject = rs.getString("Sub_name");
-					pstmt = conn.prepareStatement("SELECT Grade FROM " + subject + " WHERE Hakbun=?");
-					pstmt.setInt(1, 2013122148);
-					ResultSet rs2 = pstmt.executeQuery();
+					ResultSet rs2 = stmt.executeQuery("SELECT Grade FROM " + subject + " WHERE Hakbun='"+id+"'");
 					rs2.next();
 					grade = rs2.getString("Grade");
 					if (grade.equals("A+")) {
@@ -65,7 +63,15 @@
 					} else if (grade.equals("D0")) {
 						year_total_grade = year_total_grade + 1.0;
 					}
-
+					rs2 = stmt.executeQuery("");
+					rs2.next();
+					String major = rs2.getString("Major");
+					String major_type = "?";
+					if(major.equals("major_required")) {
+						major_credits++;
+					} else if(major.equals("major_elective")) {
+						major_credits++;
+					}
 					rs2.close();
 				}
 
@@ -83,6 +89,9 @@
 			}
 				rs.close();
 				pstmt.close();
+				session.setAttribute("credits", credits);
+				session.setAttribute("total_grade", total_grade);
+				session.setAttribute("major_credits",major_credits);
 			}
 		%>
 	</table>
