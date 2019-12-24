@@ -42,10 +42,10 @@
 </body>
 <script>
 function checkGrade(){
-    location.href="./jolup.html"  
+    location.href="./allhakjum.jsp"  
 }
 function mySchedule(){
-    location.href="./mySchedule.jsp"    
+    location.href="./cale.jsp"    
 }
 function lecture_eval(){
     location.href="./lecture_eval.jsp"    

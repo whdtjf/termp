@@ -12,7 +12,6 @@
 <%
         String id=request.getParameter("tutor_num");
         String pw=request.getParameter("pw");
-        String lecture=request.getParameter("lecture");
 
         
         Connection conn = ConnectionContext.getConnection();
@@ -43,7 +42,6 @@
         while(rs2.next()){ //login table을 쭉 읽으면서 해당 id의 table을 찾는다
         	 if(rs2.getString("Stu_num").equals(id) && rs2.getString("Password").equals(pw)){ //id && pw 로그인 성공시
                    pageContext.getSession().setAttribute("TutorID", id);  // 로그인 성공을 나타내는 특정속성 설정
-                   pageContext.getSession().setAttribute("lecture_info", lecture);
                    response.sendRedirect("./tutor_main.jsp");
                    %>
 

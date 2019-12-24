@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-mySchedule!
+	<% out.print("wtf3"); %>
 </body>
 </html>
