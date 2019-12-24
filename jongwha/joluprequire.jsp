@@ -22,7 +22,7 @@
 					.prepareStatement("SELECT subject, Major FROM Subinf WHERE Major='major_required'");
 			ResultSet rs2 = pstmt.executeQuery();
 
-			int hakbun = 2013122148;
+			String hakbun = "2013122148";
 
 			while (rs2.next()) {
 				String major = rs2.getString("Major");
@@ -30,10 +30,10 @@
 				boolean sign = false;
 				String year = "Sugang";
 
-				for (int i = hakbun / 1000000; i < 2020; i++) {
+				for (int i = Integer.parseInt(hakbun) / 1000000; i < 2020; i++) {
 					year = "Sugang" + Integer.toString(i);
 					pstmt = conn.prepareStatement("SELECT Sub_name FROM " + year + " WHERE Hakbun=?");
-					pstmt.setInt(1, 2013122148);
+					pstmt.setString(1, hakbun);
 					ResultSet rs = pstmt.executeQuery();
 					while (rs.next() && sign != true) {
 						if (subject.equals(rs.getString("Sub_name"))) {

@@ -99,19 +99,7 @@
 			}
 		%>
 	</table>
-	<SCRIPT LANGUAGE="JavaScript">
-	function confirm() {
-		for(k = 0; k < 7; k++) {
-			if(form.dow.options[k].selected){
-				
-			}	
-		}
-		for(k = 0; k < 12; k++) {
-			if(form.time.options[k].selected){
-			}	
-		}
-	}
-	</SCRIPT> 
+	
 총 수강생 : <%= sugangsaeng %>명<br>
 <form action="confirm.jsp" method="get" name="form">
 요일 : 

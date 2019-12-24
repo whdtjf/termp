@@ -12,7 +12,7 @@
 <body>
 <SCRIPT LANGUAGE="JavaScript">
 	function chkjolup() {
-		window.open("localhost:8080/ITSW/termproject/jolup.jsp");
+		window.open("jolup.html");
 	}
 </SCRIPT> 
 	<P>누적학기 성적입니다.
@@ -25,7 +25,7 @@
 			<td>평점 평균</td>
 		</tr>
 		<%
-			int hakbun = 2013122148;
+			String hakbun = "2013122148";
 			double total_grade = 0;
 			String grade;
 			int credits = 0;
@@ -33,19 +33,19 @@
 			Connection conn = ConnectionContext.getConnection();
 			String year = "Sugang";
 
-			for (int i = hakbun / 1000000; i < 2020; i++) {
+			for (int i = Integer.parseInt(hakbun) / 1000000; i < 2020; i++) {
 				double year_total_grade = 0;
 				int year_credits = 0;
 				year = "Sugang" + Integer.toString(i);
 				PreparedStatement pstmt = conn.prepareStatement("SELECT Sub_name FROM " + year + " WHERE Hakbun=?");
-				pstmt.setInt(1, 2013122148);
+				pstmt.setString(1, hakbun);
 				ResultSet rs = pstmt.executeQuery();
 
 				while (rs.next()) {
 					year_credits++;
 					String subject = rs.getString("Sub_name");
 					pstmt = conn.prepareStatement("SELECT Grade FROM " + subject + " WHERE Hakbun=?");
-					pstmt.setInt(1, 2013122148);
+					pstmt.setString(1, hakbun);
 					ResultSet rs2 = pstmt.executeQuery();
 					rs2.next();
 					grade = rs2.getString("Grade");

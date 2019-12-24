@@ -20,7 +20,7 @@
 			<td>학점</td>
 		</tr>
 		<%
-		int hakbun = 2013122148;
+		String hakbun = "2013122148";
 		double total_grade = 0;
 		String grade;
 		int credits = 0;
@@ -31,7 +31,7 @@
 		String year = "Sugang2019";
 		PreparedStatement pstmt = conn.prepareStatement("SELECT Sub_name FROM Sugang" + get_year + " WHERE Hakbun=?");
 		//pstmt.setString(1, "Sugang2019");
-		pstmt.setInt(1, 2013122148);
+		pstmt.setString(1, hakbun);
 		ResultSet rs = pstmt.executeQuery();
 		
 		while (rs.next()) {
@@ -39,7 +39,7 @@
 			String subject = rs.getString("Sub_name");
 			pstmt = conn.prepareStatement("SELECT Grade FROM " + subject + " WHERE Hakbun=?");
 			//pstmt.setString(1, subject);
-			pstmt.setInt(1, 2013122148);
+			pstmt.setString(1, hakbun);
 			ResultSet rs2 = pstmt.executeQuery();
 			rs2.next();
 			grade = rs2.getString("Grade");
