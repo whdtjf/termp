@@ -10,11 +10,11 @@
 <title>성적확인</title>
 </head>
 <body>
-<SCRIPT LANGUAGE="JavaScript">
-	function chkjolup() {
-		window.open("jolup.html");
-	}
-</SCRIPT> 
+	<SCRIPT LANGUAGE="JavaScript">
+		function chkjolup() {
+			window.open("jolup.html");
+		}
+	</SCRIPT>
 	<P>누적학기 성적입니다.
 	<table border=1>
 		<tr>
@@ -26,6 +26,8 @@
 		</tr>
 		<%
 			String hakbun = "2013122148";
+			//hakbun = (String)session.getAttribute("StudentID");
+
 			double total_grade = 0;
 			String grade;
 			int credits = 0;
@@ -72,9 +74,9 @@
 					rs2.next();
 					String major = rs2.getString("Major");
 					String major_type = "?";
-					if(major.equals("major_required")) {
+					if (major.equals("major_required")) {
 						major_credits++;
-					} else if(major.equals("major_elective")) {
+					} else if (major.equals("major_elective")) {
 						major_credits++;
 					}
 					rs2.close();
@@ -96,7 +98,7 @@
 				pstmt.close();
 				session.setAttribute("credits", credits);
 				session.setAttribute("total_grade", total_grade);
-				session.setAttribute("major_credits",major_credits);
+				session.setAttribute("major_credits", major_credits);
 			}
 		%>
 	</table>
@@ -114,7 +116,8 @@
 			<td><%=total_grade%></td>
 			<td><%=String.format("%.2f", total_grade / credits)%></td>
 		</tr>
-	</table><br>
-	<input type ="button" name="btn1" value="졸업정보확인" onClick="chkjolup()">
+	</table>
+	<br>
+	<input type="button" name="btn1" value="졸업정보확인" onClick="chkjolup()">
 </body>
 </html>

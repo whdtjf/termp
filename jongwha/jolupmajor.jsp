@@ -19,6 +19,8 @@
 		</tr>
 		<%
 			String hakbun = "2013122148";
+			//hakbun = (String)session.getAttribute("StudentID");
+
 			double total_grade = 0;
 			String grade;
 			int credits = 0;
@@ -29,9 +31,8 @@
 
 				year = "Sugang" + Integer.toString(i);
 				PreparedStatement pstmt = conn.prepareStatement("SELECT i.subject, i.Major FROM Subinf AS i JOIN "
-						+ year + " AS s ON s.Sub_name=i.subject WHERE s.Hakbun=? AND i.Year=?;");
+						+ year + " AS s ON s.Sub_name=i.subject WHERE s.Hakbun=?;");
 				pstmt.setString(1, hakbun);
-				pstmt.setString(2, Integer.toString(i));
 				ResultSet rs = pstmt.executeQuery();
 
 				while (rs.next()) {

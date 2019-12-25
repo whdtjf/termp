@@ -23,6 +23,7 @@
 			ResultSet rs2 = pstmt.executeQuery();
 
 			String hakbun = "2013122148";
+			//hakbun = (String)session.getAttribute("StudentID");
 
 			while (rs2.next()) {
 				String major = rs2.getString("Major");
@@ -50,7 +51,36 @@
 		<%
 			}
 		%>
+		<%
+			pstmt = conn.prepareStatement("SELECT subject, Major FROM Subinf WHERE Major='general_required'");
+			ResultSet rs3 = pstmt.executeQuery();
 
+			while (rs3.next()) {
+				String major2 = rs3.getString("Major");
+				String subject2 = rs3.getString("subject");
+				boolean sign2 = false;
+				String year = "Sugang";
+
+				for (int i = Integer.parseInt(hakbun) / 1000000; i < 2020; i++) {
+					year = "Sugang" + Integer.toString(i);
+					pstmt = conn.prepareStatement("SELECT Sub_name FROM " + year + " WHERE Hakbun=?");
+					pstmt.setString(1, hakbun);
+					ResultSet rs4 = pstmt.executeQuery();
+					while (rs4.next() && sign2 != true) {
+						if (subject2.equals(rs4.getString("Sub_name"))) {
+							sign2 = true;
+						}
+					}
+				}
+		%>
+		<tr>
+			<td><%=subject2%></td>
+			<td><%=major2%></td>
+			<td><%=sign2%></td>
+		</tr>
+		<%
+			}
+		%>
 	</table>
 
 </body>
