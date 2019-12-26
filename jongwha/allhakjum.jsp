@@ -10,11 +10,11 @@
 <title>성적확인</title>
 </head>
 <body>
-<SCRIPT LANGUAGE="JavaScript">
-	function chkjolup() {
-		window.open("localhost:8080/ITSW/termproject/jolup.jsp");
-	}
-</SCRIPT> 
+	<SCRIPT LANGUAGE="JavaScript">
+		function chkjolup() {
+			window.open("jolup.html");
+		}
+	</SCRIPT>
 	<P>누적학기 성적입니다.
 	<table border=1>
 		<tr>
@@ -25,7 +25,9 @@
 			<td>평점 평균</td>
 		</tr>
 		<%
-			int hakbun = 2013122148;
+			String hakbun = "2013122148";
+			//hakbun = (String)session.getAttribute("StudentID");
+
 			double total_grade = 0;
 			String grade;
 			int credits = 0;
@@ -33,19 +35,19 @@
 			Connection conn = ConnectionContext.getConnection();
 			String year = "Sugang";
 
-			for (int i = hakbun / 1000000; i < 2020; i++) {
+			for (int i = Integer.parseInt(hakbun) / 1000000; i < 2020; i++) {
 				double year_total_grade = 0;
 				int year_credits = 0;
 				year = "Sugang" + Integer.toString(i);
 				PreparedStatement pstmt = conn.prepareStatement("SELECT Sub_name FROM " + year + " WHERE Hakbun=?");
-				pstmt.setInt(1, 2013122148);
+				pstmt.setString(1, hakbun);
 				ResultSet rs = pstmt.executeQuery();
 
 				while (rs.next()) {
 					year_credits++;
 					String subject = rs.getString("Sub_name");
 					pstmt = conn.prepareStatement("SELECT Grade FROM " + subject + " WHERE Hakbun=?");
-					pstmt.setInt(1, 2013122148);
+					pstmt.setString(1, hakbun);
 					ResultSet rs2 = pstmt.executeQuery();
 					rs2.next();
 					grade = rs2.getString("Grade");
@@ -72,9 +74,9 @@
 					rs2.next();
 					String major = rs2.getString("Major");
 					String major_type = "?";
-					if(major.equals("major_required")) {
+					if (major.equals("major_required")) {
 						major_credits++;
-					} else if(major.equals("major_elective")) {
+					} else if (major.equals("major_elective")) {
 						major_credits++;
 					}
 					rs2.close();
@@ -96,7 +98,7 @@
 				pstmt.close();
 				session.setAttribute("credits", credits);
 				session.setAttribute("total_grade", total_grade);
-				session.setAttribute("major_credits",major_credits);
+				session.setAttribute("major_credits", major_credits);
 			}
 		%>
 	</table>
@@ -114,7 +116,8 @@
 			<td><%=total_grade%></td>
 			<td><%=String.format("%.2f", total_grade / credits)%></td>
 		</tr>
-	</table><br>
-	<input type ="button" name="btn1" value="졸업정보확인" onClick="chkjolup()">
+	</table>
+	<br>
+	<input type="button" name="btn1" value="졸업정보확인" onClick="chkjolup()">
 </body>
 </html>
