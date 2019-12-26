@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="lab.ConnectionContext"%>
+<%@ page import="calculator.ConnectionContext"%>
 <%@ page import="java.sql.*"%>
 
 <!DOCTYPE html>
@@ -10,11 +10,11 @@
 <title>성적확인</title>
 </head>
 <body>
-<SCRIPT LANGUAGE="JavaScript">
-	function chkjolup() {
-		window.open("localhost:8080/lab/termp/jolup.jsp");
-	}
-</SCRIPT> 
+	<SCRIPT LANGUAGE="JavaScript">
+		function chkjolup() {
+			window.open("jolup.html");
+		}
+	</SCRIPT>
 	<P>누적학기 성적입니다.
 	<table border=1>
 		<tr>
@@ -25,8 +25,9 @@
 			<td>평점 평균</td>
 		</tr>
 		<%
-			String id=(String)pageContext.getSession().getAttribute("StudentID");
-			int hakbun=Integer.parseInt(id);
+			String hakbun = "2013122148";
+			//hakbun = (String)session.getAttribute("StudentID");
+
 			double total_grade = 0;
 			String grade;
 			int credits = 0;
@@ -34,16 +35,20 @@
 			Connection conn = ConnectionContext.getConnection();
 			String year = "Sugang";
 
-			for (int i = hakbun / 1000000; i < 2020; i++) {
+			for (int i = Integer.parseInt(hakbun) / 1000000; i < 2020; i++) {
 				double year_total_grade = 0;
 				int year_credits = 0;
 				year = "Sugang" + Integer.toString(i);
-				Statement stmt = conn.createStatement();
-				ResultSet rs=stmt.executeQuery("SELECT Sub_name FROM " + year + " WHERE Hakbun='"+id+"'");
+				PreparedStatement pstmt = conn.prepareStatement("SELECT Sub_name FROM " + year + " WHERE Hakbun=?");
+				pstmt.setString(1, hakbun);
+				ResultSet rs = pstmt.executeQuery();
+
 				while (rs.next()) {
 					year_credits++;
 					String subject = rs.getString("Sub_name");
-					ResultSet rs2 = stmt.executeQuery("SELECT Grade FROM " + subject + " WHERE Hakbun='"+id+"'");
+					pstmt = conn.prepareStatement("SELECT Grade FROM " + subject + " WHERE Hakbun=?");
+					pstmt.setString(1, hakbun);
+					ResultSet rs2 = pstmt.executeQuery();
 					rs2.next();
 					grade = rs2.getString("Grade");
 					if (grade.equals("A+")) {
@@ -63,13 +68,15 @@
 					} else if (grade.equals("D0")) {
 						year_total_grade = year_total_grade + 1.0;
 					}
-					rs2 = stmt.executeQuery("");
+					pstmt = conn.prepareStatement("SELECT Major FROM Subinf WHERE subject=?");
+					pstmt.setString(1, subject);
+					rs2 = pstmt.executeQuery();
 					rs2.next();
 					String major = rs2.getString("Major");
 					String major_type = "?";
-					if(major.equals("major_required")) {
+					if (major.equals("major_required")) {
 						major_credits++;
-					} else if(major.equals("major_elective")) {
+					} else if (major.equals("major_elective")) {
 						major_credits++;
 					}
 					rs2.close();
@@ -83,6 +90,7 @@
 			<td><a href=<%="hakjum.jsp?year=" + Integer.toString(i)%>><%=Integer.toString(i) + "년"%></a></td>
 			<td><%=year_credits%></td>
 			<td><%=year_total_grade%></td>
+			
 			<td><%=String.format("%.2f", year_total_grade / year_credits)%></td>
 		</tr>
 		<%
@@ -91,7 +99,7 @@
 				pstmt.close();
 				session.setAttribute("credits", credits);
 				session.setAttribute("total_grade", total_grade);
-				session.setAttribute("major_credits",major_credits);
+				session.setAttribute("major_credits", major_credits);
 			}
 		%>
 	</table>
@@ -109,7 +117,8 @@
 			<td><%=total_grade%></td>
 			<td><%=String.format("%.2f", total_grade / credits)%></td>
 		</tr>
-	</table><br>
-	<input type ="button" name="btn1" value="졸업정보확인" onClick="chkjolup()">
+	</table>
+	<br>
+	<input type="button" name="btn1" value="졸업정보확인" onClick="chkjolup()">
 </body>
 </html>
