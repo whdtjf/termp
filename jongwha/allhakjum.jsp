@@ -90,6 +90,7 @@
 			<td><a href=<%="hakjum.jsp?year=" + Integer.toString(i)%>><%=Integer.toString(i) + "년"%></a></td>
 			<td><%=year_credits%></td>
 			<td><%=year_total_grade%></td>
+			
 			<td><%=String.format("%.2f", year_total_grade / year_credits)%></td>
 		</tr>
 		<%
